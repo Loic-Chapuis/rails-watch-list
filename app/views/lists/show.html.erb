@@ -1,3 +1,36 @@
-<h1><%= @list.name %></h1>
+<div>
+  <h1><%= @list.name %></h1>
+<div>
 
-<h3><%= link_to "back to homepage", lists_path %></h3>
+<% @list.movies.each do |movie| %>
+<% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+  <div class="container">
+    <div class="row">
+      <div class="col-4 mb-3">
+          <div class="card">
+            <img class="card-img-top" src="<%= movie.poster_url %>" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"> <%= movie.title %> </h5>
+              <p class="card-text"><%= movie.overview %></p>
+            </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fas fa-comments"></i><small class="flex-grow-1"><%= bookmark.comment %></small></li>
+              </ul>
+            <div class="card-body">
+              <a href="#" class="card-link"><%= link_to 'delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  <%= link_to 'add a movie', new_list_bookmark_path(@list), class: 'btn btn-primary' %>
+
+  <div>
+    <%= link_to "delete", list_path(@list) %>
+  </div>
+  <div>
+    <%= link_to "back to list", lists_path %>
+  </div>
+</div>

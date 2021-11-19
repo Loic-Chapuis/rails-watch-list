@@ -24,6 +24,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list.destroy
+    raise
     redirect_to lists_path
   end
 

@@ -1,9 +1,15 @@
-<h1>Welcome</h1>
-
-<%= link_to 'Create a movie list', new_list_path, class: 'btn btn-flat' %>
-
-<ul>
-  <% @lists.each do |list| %>
-  <li><%= link_to list.name, list_path(list.id) %></li>
-  <% end %>
-</ul>
+<div>
+  <div class="container">
+    <h1>Welcome</h1>
+  </div>
+  <div class="container">
+    <%= link_to 'Create a movie list', new_list_path, class: 'btn btn-primary' %>
+  </div>
+  <div class="container">
+    <ul>
+      <% @lists.each do |list| %>
+      <li> <h3> <%= link_to list.name, list_path(list.id) %> </h3></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
